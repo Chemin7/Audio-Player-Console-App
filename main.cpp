@@ -37,6 +37,7 @@ void menu() {
     char opcion[100], numero[100];
     do {
         system("cls");
+
         SetConsoleTextAttribute(hConsole, 10);
         cout<< "---------- ESPORIFAY----------"<<endl<<endl;
         SetConsoleTextAttribute(hConsole, 11);
@@ -129,7 +130,8 @@ void menu() {
                         cout<< "Direccion nueva: ";
                         getline(cin, aux);
                         cancion.setDireccion(aux);
-                        lista->modificar(id, cancion);
+                        cancion.setID(num);
+                        lista->modificar(num, cancion);
                         cout<< "Cancion actualizada correctamente"<<endl;
                         system("pause");
                         }
