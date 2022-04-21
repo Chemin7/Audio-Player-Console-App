@@ -19,10 +19,13 @@ Lista::~Lista() {
         }
     }
 
-void Lista::insertarPrimero(Cancion cancion) {
+
+void Lista::insertarUltimo(Cancion cancion) {
     Nodo *nuevo=new Nodo();
+
     nuevo->song= cancion;
     nuevo->song.pos= this->pos;
+    nuevo->song.setID(id++);
     pos++;
     if(head == nullptr) {
         nuevo->next=nuevo;
@@ -35,29 +38,7 @@ void Lista::insertarPrimero(Cancion cancion) {
         nuevo->prev=last;
         head->prev=nuevo;
         last->next=nuevo;
-        head=nuevo;
-        }
-    actual=nuevo;
 
-    }
-
-void Lista::insertarUltimo(Cancion cancion) {
-    Nodo *nuevo= new Nodo();
-    nuevo->song = cancion;
-    nuevo->song.pos= this->pos;
-    nuevo->song.setID(id++);
-    pos++;
-    if(head==nullptr) {
-        nuevo->next=nuevo;
-        nuevo->prev=nuevo;
-        head=nuevo;
-        }
-    else {
-        Nodo *last = head->prev;
-        nuevo->next=head;
-        nuevo->prev=last;
-        head->prev=nuevo;
-        last->next=nuevo;
         }
     actual=nuevo;
     }
@@ -84,11 +65,11 @@ void Lista::desplegar() {
         Cancion cancion;
         do {
             cancion =temp->song;
-            SetConsoleTextAttribute(hConsole, 14);
+
             gotoxy(50,2);
             for(int i=48; i<=130; i++)
                 cout<<"-";
-            SetConsoleTextAttribute(hConsole, 15);
+
 
 
 
@@ -160,7 +141,7 @@ void Lista::eliminar(const int& posicion) {
             }
         else {
             Nodo *temp=head;
-            for(int i=1; i<=posicion; i++) {
+            for(int i=1; i<=posicion-1; i++) {
                 temp=temp->next;
                 }
             Nodo *tempo=temp;
@@ -182,44 +163,28 @@ Cancion Lista::buscar(const int& posicion) {
     return temp->song;
     }
 
-/*void Lista::modificar(const int& posicion, Cancion cancion){
-    Nodo *temp =head;
-    for (int i =1; i<=posicion; i++){
-        temp=temp->next;
-    }
-    int pos =temp->song.pos;
-    temp->song =cancion;
-    temp->song.pos=pos;
-    actualizarPos();
-}*/
 void Lista::modificar(int id, Cancion c) {
-    //if(!this->isEmpty()) {
+    if(!this->isEmpty()) {
         Nodo* aux(head);
         int pos ;
-        cout<<"a"<<endl;
 
         do {
-                cout<<"Id: "<<id<<"  id aux: "<<aux->song.getID()<<endl;
+
             if(aux->song.getID() == id) {
                 pos=aux->song.pos;
                 aux->song=c;
                 aux->song.pos=pos;
-                cout<<"x"<<endl;
+
                 return;
                 }
-                 cout<<"b"<<endl;
+            cout<<"b"<<endl;
             aux=aux->next;
             }
         while(aux!=head);
-        cout<<"c"<<endl;
-           /* int pos=actual->song.pos;
 
-            this->actual->song=c;
-
-                actual->song.pos=pos;*/
-       // }
+        }
     }
-
+/*
 void Lista::imprimir(int puntero, Cancion cancion) {
     Nodo* temp = head;
     if(puntero <= travel() && puntero>=1) {
@@ -263,7 +228,7 @@ void Lista::imprimir(int puntero, Cancion cancion) {
             }
         }
 
-    }
+    }*/
 
 void Lista:: imprimirActual() {
     gotoxy(70, 20);
@@ -274,6 +239,8 @@ void Lista:: imprimirActual() {
     cout<< "Album: "<<actual->song.getAlbum();
     gotoxy(70, 23);
     cout<< "Genero: "<<actual->song.getGenero();
+
+    //actual->Obj(Flor);
     }
 
 void Lista::play() {
@@ -311,81 +278,89 @@ void Lista::reproducir() {
 
 void Lista:: llenar() {
     Cancion cancion;
-    string nombre= "Gods plan";
-    string artista= "Drake";
-    string album= "Scorpion";
-    string genero="Rap";
+    string nombre= "Spirit B.";
+    string artista= "Yuna";
+    string album= "Red";
+    string genero="Instrumental";
     cancion.setNombre(nombre);
     cancion.setAutor(artista);
     cancion.setAlbum(album);
     cancion.setGenero(genero);
-    cancion.setDireccion("7-GodsPlan.wav");
+    cancion.setDireccion("spirit-blossom-15285.wav");
     this->insertarUltimo(cancion);
 
-    string nombre1 ="Sunflower";
-    string artista1= "Post Malone";
-    string album1= "SpiderMan";
-    string genero1= "Hip Hop";
+    string nombre1 ="slow trap";
+    string artista1= "OHio";
+    string album1= "PAlM";
+    string genero1= "Trap";
     cancion.setNombre(nombre1);
     cancion.setAutor(artista1);
     cancion.setAlbum(album1);
     cancion.setGenero(genero1);
-    cancion.setDireccion("6-Sunflower.wav");
+    cancion.setDireccion("slow-trap-18565.wav");
     this->insertarUltimo(cancion);
 
-    string nombre2= "Without me";
-    string artista2="Eminem";
-    string album2="Eminem show";
-    string genero2="Rap";
+    string nombre2= "Let it go";
+    string artista2="Elsa";
+    string album2="Frozen";
+    string genero2="Disney";
     cancion.setNombre(nombre2);
     cancion.setAutor(artista2);
     cancion.setAlbum(album2);
     cancion.setGenero(genero2);
-    cancion.setDireccion("3-WithoutMe.wav");
+    cancion.setDireccion("let-it-go-12279.wav");
     this->insertarUltimo(cancion);
 
-    string nombre3= "Solia";
-    string artista3="Bad Bunny";
-    string album3="YHLQMDLG";
-    string genero3="Reggaeton";
+    string nombre3= "into the night";
+    string artista3="Good Blue";
+    string album3="QWERTY";
+    string genero3="instrument";
     cancion.setNombre(nombre3);
     cancion.setAutor(artista3);
     cancion.setAlbum(album3);
     cancion.setGenero(genero3);
-    cancion.setDireccion("1-Solia.wav");
+    cancion.setDireccion("into-the-night.wav");
     this->insertarUltimo(cancion);
 
-    string nombre4= "Un millon de primaveras";
-    string artista4="Vicente Fernandez";
-    string album4="Para siempre";
-    string genero4="Mariachi";
+    string nombre4= "Ever Flowing";
+    string artista4="PIsck";
+    string album4="For ever";
+    string genero4="Instument";
     cancion.setNombre(nombre4);
     cancion.setAutor(artista4);
     cancion.setAlbum(album4);
     cancion.setGenero(genero4);
-    cancion.setDireccion("8-UnMillonDePrimaveras.wav");
+    cancion.setDireccion("ever-flowing.wav");
     this->insertarUltimo(cancion);
+    Nodo* aux(head);
 
     }
 
 void Lista::invertir() {
-    if(head!=nullptr) {
-        Nodo *prevNodo =head;
-        Nodo *temp=head;
-        Nodo *curNodo= head->next;
 
-        prevNodo->next=prevNodo;
-        prevNodo->prev=prevNodo;
-        while(curNodo != head) {
-            temp=curNodo->next;
-            curNodo->next=prevNodo;
-            prevNodo->prev=curNodo;
-            head->next=curNodo;
-            prevNodo =curNodo;
-            curNodo =temp;
+    if(head != NULL) {
+        Nodo* prevNode = head;
+        Nodo* tempNode = head;
+        Nodo* curNode = head->next;
+
+
+        prevNode->prev = prevNode;
+
+        while(curNode != head) {
+
+            tempNode = curNode->next;
+
+            curNode->next = prevNode;
+            prevNode->prev = curNode;
+            head->next = curNode;
+            curNode->prev = head;
+
+            prevNode = curNode;
+            curNode = tempNode;
             }
 
-        head=prevNodo;
+        head = prevNode;
+        actual= prevNode;
         actualizarPos();
         }
     }
@@ -405,3 +380,46 @@ void Lista::actualizarPos() {
     actual=head;
     this->desplegar();
     }
+Lista::Nodo* Lista::getLast() {
+    return head->prev;
+    }
+
+Lista::Nodo* Lista::getFirst() {
+    return head;
+    }
+
+void Lista::reproductor()
+{
+     char soundfile1[]="open \"C:/Users/user/Downloads/spirit-blossom-15285.mp3\" type mpegvideo alias mp3";
+   string meh;
+   int opc;
+   //open \"C:/SEDDI/musicProject/1x1.mp3\" type mpegvideo alias mp3
+   //cin.sync();
+   //getline(cin,meh);
+   //strcpy(soundfile1,meh.c_str());
+   mciSendString((LPCSTR)soundfile1, NULL, 0, NULL);
+   mciSendString("play mp3", NULL, 0, NULL);
+    gotoxy(1, 16);
+   cout<<"escoje una"<<endl;
+   cout<<"1.-Pause"<<endl<<"2.-continuar"<<endl<<"3.-detener"<<endl;
+   do{
+   cin>>opc;
+   switch(opc)
+   {
+   case 1:
+    {
+        mciSendString("pause mp3", NULL, 0, NULL);
+    }break;
+   case 2:
+    {
+        mciSendString("resume mp3", NULL, 0, NULL);
+    }break;
+   case 3:
+    {
+        mciSendString("stop mp3", NULL, 0, NULL);
+    }break;
+   }
+   }while(opc!=3);
+   mciSendString("close mp3", NULL, 0, NULL);
+   system("pause");
+}

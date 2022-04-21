@@ -33,24 +33,25 @@
 	<iostream>
 	<string>
 
-1650413015 source:c:\users\user\onedrive\documentos\reproductor de musica\main.cpp
+1650504129 source:c:\users\user\onedrive\documentos\reproductor de musica\main.cpp
 	<iostream>
 	<windows.h>
 	<mmsystem.h>
 	"Lista.h"
 	"Cancion.h"
 
-1650413320 c:\users\user\onedrive\documentos\reproductor de musica\lista.h
+1650504005 c:\users\user\onedrive\documentos\reproductor de musica\lista.h
 	<iostream>
 	<windows.h>
 	<mmsystem.h>
+	<functional>
 	"Cancion.h"
 
 1650412321 c:\users\user\onedrive\documentos\reproductor de musica\cancion.h
 	<iostream>
 	<string>
 
-1650413015 source:c:\users\user\onedrive\documentos\reproductor de musica\lista.cpp
+1650504020 source:c:\users\user\onedrive\documentos\reproductor de musica\lista.cpp
 	"Lista.h"
 	"gotoxy.h"
 

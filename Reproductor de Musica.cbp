@@ -32,8 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Cancion.cpp" />
 		<Unit filename="Cancion.h" />
+		<Unit filename="Lista.cpp" />
 		<Unit filename="Lista.h" />
+		<Unit filename="gotoxy.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

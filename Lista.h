@@ -3,6 +3,7 @@
 #include <iostream>
 #include <windows.h>
 #include <mmsystem.h>
+#include <functional>
 using namespace std;
 #include "Cancion.h"
 
@@ -14,6 +15,7 @@ class Lista{
                 Cancion song;
                 Nodo *next;
                 Nodo *prev;
+                void Obj(std::function<void ()>);
         };
         Nodo *head;
         Nodo *actual;
@@ -40,6 +42,9 @@ class Lista{
         void reproducir();
         void llenar();
         void invertir();
+        Nodo* getLast();
+        Nodo* getFirst();
+        void reproductor();
 
 };
 

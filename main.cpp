@@ -3,13 +3,17 @@
 #include <mmsystem.h>
 #include "Lista.h"
 #include "Cancion.h"
+#pragma comment(lib, "user32")
 using namespace std;
+
 
 Cancion cancion;
 Lista *lista = new Lista();
 void menu();
 void imprimirActual();
 void gotoxy(int x, int y);
+
+
 
 void noValor() {
     cout<< "Ingrese un digito valido"<<endl;
@@ -50,13 +54,16 @@ void menu() {
         cout<< "[7] Reproducir cancion"<<endl;
         cout<< "[8] Mostrar cancion actual"<<endl;
         cout<< "[9] Invertir"<<endl;
-        cout<< "[10] Salir"<<endl;
+        cout<< "[10] Obtener primero"<<endl;
+        cout<< "[11] Obtener ultimo"<<endl;
+        cout<< "[12] Reproductor"<<endl;
+        cout<< "[13] Salir"<<endl;
         SetConsoleTextAttribute(hConsole, 15);
         lista->desplegar();
         if(!lista->isEmpty()){
             lista->imprimirActual();
         }
-        gotoxy(1, 12);
+        gotoxy(1, 16);
         cout<< "Seleccione una opcion: ";
         cin>>opcion;
         if(opc=atoi(opcion)) {
@@ -82,18 +89,24 @@ void menu() {
                     cout<< "Ingrese direccion: ";
                     getline(cin, aux);
                     cancion.setDireccion(aux);
+
                     lista->insertarUltimo(cancion);
                     id++;
                     system("pause");
                     system("cls");
                     break;
                 case 3:
+                     if(!lista->isEmpty())
                     lista->siguiente();
+
                     break;
                 case 4:
+                     if(!lista->isEmpty())
                     lista->anterior();
+
                     break;
                 case 5:
+                    if(!lista->isEmpty()){
                     cout<< "Ingrese el ID que desea eliminar: ";
                     cin>>numero;
                     if(num=atoi(numero)) {
@@ -106,11 +119,14 @@ void menu() {
                         cancion.setID(num);
                         lista->eliminar(num);
                         }
-                    else {
+                        else {
                         noValor();
                         }
+                    }
+
                     break;
                 case 6:
+                     if(!lista->isEmpty()){
                     cout<< "Ingrese el ID que desea modificar: ";
                     cin>>numero;
                     if(num=atoi(numero)) {
@@ -135,19 +151,35 @@ void menu() {
                         cout<< "Cancion actualizada correctamente"<<endl;
                         system("pause");
                         }
-                    else {
+                        else {
                         noValor();
                         }
+                     }
+
                     break;
                 case 7:
+                     if(!lista->isEmpty()){
                     lista->reproducir();
                     system("pause");
+                     }
                     break;
                 case 8:
+                     if(!lista->isEmpty())
                     lista->imprimirActual();
                     break;
                 case 9:
                     lista->invertir();
+                    break;
+                case 10:
+                    cout<<lista->getFirst()->song.getNombre();
+                    system("pause");
+                    break;
+                case 11:
+                     cout<<lista->getLast()->song.getNombre();
+                     system("pause");
+                     break;
+                case 12:
+                    lista->reproductor();
                     break;
                 case 0:
                     cout<< "Saliendo del programa"<<endl;
@@ -162,12 +194,46 @@ void menu() {
             noValor();
             }
         }
-    while(opc!=10);
+    while(opc!=13);
 
     }
-
+void reproductor(){
+    char soundfile1[]="open \"C:/Users/user/Downloads/spirit-blossom-15285.mp3\" type mpegvideo alias mp3";
+   string meh;
+   int opc;
+   //open \"C:/SEDDI/musicProject/1x1.mp3\" type mpegvideo alias mp3
+   //cin.sync();
+   //getline(cin,meh);
+   //strcpy(soundfile1,meh.c_str());
+   mciSendString((LPCSTR)soundfile1, NULL, 0, NULL);
+   mciSendString("play mp3", NULL, 0, NULL);
+   cout<<"escoje una"<<endl;
+   cout<<"1.-Pause"<<endl<<"2.-continuar"<<endl<<"3.-detener"<<endl;
+   do{
+   cin>>opc;
+   switch(opc)
+   {
+   case 1:
+    {
+        mciSendString("pause mp3", NULL, 0, NULL);
+    }break;
+   case 2:
+    {
+        mciSendString("resume mp3", NULL, 0, NULL);
+    }break;
+   case 3:
+    {
+        mciSendString("stop mp3", NULL, 0, NULL);
+    }break;
+   }
+   }while(opc!=3);
+   mciSendString("close mp3", NULL, 0, NULL);
+   system("pause");
+}
 
 int main() {
+    ::SendMessage(::GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000);
     menu();
+    //reproductor();
     return 0;
     }
